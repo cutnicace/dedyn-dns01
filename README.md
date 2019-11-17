@@ -20,6 +20,7 @@ To obtain full static binary without single dependency run:
 `CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -ldflags="-s -w" -o dedyn_dns01`
 
 Thanks to Go goodness, you may also choose different platform (e.g. mips, aarch64, etc.) based on your needs.
+For example the above line is for an arm architecture since my traefik is running on an raspberry pi.
 
 And optionally shrink the result:
 
