@@ -1,9 +1,11 @@
-# dm-dns01
+# Big Thanks to Pavel Král for providing the configuration for writing the dm-dns01 provider for Czech DNS provider Domain Master. This is an adaption of his program to work with the dedyn api.
 
-This is [Traefik](https://traefik.io/) ACME exec provider for Czech DNS provider [Domain Master](https://www.domainmaster.cz/).
+# dedyn-dns01
 
-It can be used for [Let's Encrypt](https://letsencrypt.org/) DNS01 a challenge 
-automation for records hosted in Domain Master's nameservers. This provider is suitable for running under
+This is [Traefik](https://traefik.io/) ACME exec provider for German DNS provider [dedyn.io](https://www.desec.io/).
+
+It can be used for [Let's Encrypt](https://letsencrypt.org/) DNS01 challenge 
+automation for domains from desec.io . This provider is suitable for running under
 dockerized Traefic (e.g. [traefik:latest](https://hub.docker.com/_/traefik/) based on scratch) that does not
 contains shell or other unnecessary utilities.
 
@@ -15,23 +17,22 @@ You may need to install dependencies first:
 
 To obtain full static binary without single dependency run:
 
-`CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -ldflags="-s -w" -o dm-dns01`
+`CGO_ENABLED=0 GOOS=linux GOARCH=arm go build -a -ldflags="-s -w" -o dedyn_dns01`
 
 Thanks to Go goodness, you may also choose different platform (e.g. mips, aarch64, etc.) based on your needs.
 
 And optionally shrink the result:
 
-`upx --ultra-brute dm-dns01`
+`upx --ultra-brute dedyn_dns01`
 
 ## Example usage with docker-compose
 
-Just provide following environment properties to access [DM API](https://www.domainmaster.cz/masterapi/) 
+Just provide following environment properties to access [dedyn_api](https://desec.io/api/v1/) 
 
-* `EXEC_PATH` - Path to build dm-dns01, accessible in guest container. 
-* `DM_API_USER` - DM API username
-* `DM_API_PASSWD`- DM API password
+* `EXEC_PATH` - Path to build dedyn_dns01, accessible in guest container. 
+* `DEDYN_TOKEN` - your dedyn.io access token 
+* `DEDYN_NAME`- your dedyn domain name
 
-> **WARNING**: DM by default does not allow access to their API unless you got ,,partner'' status. You have to negotiate with them about this issue.
 
 ```
 version: '3'
@@ -48,9 +49,9 @@ services:
       - ./etc:/etc/traefik
       - /var/run/docker.sock:/var/run/docker.sock
     environment:
-      - EXEC_PATH=/etc/traefik/dm-dns01
-      - DM_API_USER=GR:JOHN-DOE
-      - DM_API_PASSWD=35GRR46AS5S57BBF
+      - EXEC_PATH=/etc/traefik/dedyn_dns01
+      - DEDYN_TOKEN=d41d8cd98f00b204e9800998ecf8427e
+      - DEDYN_NAME=example.dedyn.io
   whoami:
     image: containous/whoami 
     labels:
@@ -63,4 +64,4 @@ volumes:
 
 ```
 
-In example above dm-dns01 executable must be put under ./etc/dm-dns01 relative to docker-compose.yaml
+In example above dedyn_dns01 executable must be put under ./etc/dedyn_dns01 relative to docker-compose.yaml
