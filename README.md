@@ -2,7 +2,7 @@
 
 # dedyn-dns01
 
-This is [Traefik](https://traefik.io/) ACME exec provider for German DNS provider [dedyn.io](https://www.desec.io/).
+This is [Traefik](https://traefik.io/) ACME exec provider for german dyndns provider [dedyn.io](https://www.desec.io/).
 
 It can be used for [Let's Encrypt](https://letsencrypt.org/) DNS01 challenge 
 automation for domains from desec.io . This provider is suitable for running under
