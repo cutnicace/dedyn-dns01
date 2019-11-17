@@ -11,6 +11,9 @@ contains shell or other unnecessary utilities.
 
 ## Building
 
+If you are already running docker you can setup a functional go development environment (credit goes to this [tutorial](https://levelup.gitconnected.com/setup-simple-go-development-environment-with-docker-b8b9c0d4e0a8)) with:
+`docker run --rm -it --name go-restful -v $PWD:/go/src/github.com/the-evengers/go-restful golang`
+
 You may need to install dependencies first:
 
 `go get github.com/docopt/docopt-go`
@@ -65,4 +68,4 @@ volumes:
 
 ```
 
-In example above dedyn_dns01 executable must be put under ./etc/dedyn_dns01 relative to docker-compose.yaml
+In the example above the dedyn_dns01 executable must be put under ./etc/dedyn_dns01 relative to docker-compose.yaml
