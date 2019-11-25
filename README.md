@@ -31,7 +31,7 @@ And optionally shrink the result:
 
 ## Example usage with docker-compose
 
-Just provide following environment properties to access [dedyn_api](https://desec.io/api/v1/) 
+Just provide following environment properties to access [dedyn_api](https://desec.readthedocs.io/en/latest/#) 
 
 * `EXEC_PATH` - Path to build dedyn_dns01, accessible in guest container. 
 * `DEDYN_TOKEN` - your dedyn.io access token 
